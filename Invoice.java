@@ -1,134 +1,85 @@
 /**
- * @author Rafael Ayala
- * 
- * @since September 14, 2023
- * 
- *        - CS 3331 - Advanced Object-Oriented Programming
- * 
- *        - Dr. Daniel Mejia
- * 
- *        - Programming Assignment 1
- * 
- *        - Invoice.java
- * 
- *        - The following file defines an Invoice that obtains traits from
- *        Ticket and Customer objects to form invoices for individual
- *        transactions.
- * 
- *        - This work was done individually and completely on my own. I did not
- *        share, reproduce, or alter any part of this
- *        assignment for any purpose. I did not share code, upload this
- *        assignment online in any form, or
- *        view/received/modified code written from anyone else. All deliverables
- *        were produced entirely on my own. This
- *        assignment is part of an academic course at The University of Texas at
- *        El Paso and a grade will be assigned for
- *        the work I produced.
- * 
+ * @author Darien Booth 
+ * @version 1.3
  */
 
+ /**
+  * Invoice class for structuring information of an invoice
+  */
 public class Invoice {
 
     /**
-     * These are the attributes for each Invoice object.
+     * Attributes for class
      */
-    private String customerLastNameandEventName;
-    private String ticketType;
-    private int ticketQuantity;
-    private double totalPrice;
-    private int conNum;
+    private int numOfTickets;
+    private int totalPrice;
+    private int confirmationNum; 
 
     /**
-     * @param none
+     * for creating instance of the class
      */
     public Invoice() {
+
+    }
+
+    // created getters and setters for all attributes
+
+    /**
+     * getting number of tickets purchased
+     * @return integer of number of tickets
+     */
+    public int getNumOfTickets() {
+        return this.numOfTickets; 
     }
 
     /**
-     * @param customerLastNameandEventName
+     * setting number of tickets purchased 
+     * @param numOfTickets integer for number of tickets
      */
-    public Invoice(String customerLastNameandEventName) {
-        this.customerLastNameandEventName = customerLastNameandEventName;
+    public void setNumOfTickets(int numOfTickets) {
+        this.numOfTickets = numOfTickets; 
     }
 
     /**
-     * @param none
-     * @return this.customerLastName
+     * getting total price
+     * @return integer of total
      */
-    public String getCustomerLastNameandEventName() {
-        return this.customerLastNameandEventName;
+    public int getTotalPrice() {
+        return this.totalPrice; 
     }
 
     /**
-     * @return none
-     * @param customerLastNameandEventName
+     * setting total price
+     * @param totalPrice integer for total
      */
-    public void setCustomerLastNameandEventName(String customerLastNameandEventName) {
-        this.customerLastNameandEventName = customerLastNameandEventName;
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice; 
     }
 
     /**
-     * @param none
-     * @return this.ticketQuantity
+     * getting confirmation number 
+     * @return integer 
      */
-    public int getTicketQuantity() {
-        return this.ticketQuantity;
+    public int getConfirmationNum() {
+        return this.confirmationNum; 
     }
 
     /**
-     * @return none
-     * @param ticketQuantity
+     * setting confirmation number
+     * @param confirmationNum integer 
      */
-    public void setTicketQuantity(int ticketQuantity) {
-        this.ticketQuantity = ticketQuantity;
+    public void setConfirmationNum(int confirmationNum) {
+        this.confirmationNum = confirmationNum; 
     }
 
     /**
-     * @param none
-     * @return this.totalPrice
+     * printing invoice
      */
-    public double getTotal() {
-        return this.totalPrice;
+    public void printInvoice() {
+        System.out.println("---------------Invoice-----------------");
+        System.out.println("Here is the total number of tickets you purchased: " + this.numOfTickets);
+        System.out.println("Here is the total price: " + this.totalPrice);
+        System.out.println("Here is your confirmation number: " + this.confirmationNum);
+        System.out.println("-----------------------------------------");
     }
-
-    /**
-     * @return none
-     * @param totalPrice
-     */
-    public void setTotal(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    /**
-     * @param none
-     * @return this.conNume
-     */
-    public int getConNum() {
-        return this.conNum;
-    }
-
-    /**
-     * @return none
-     * @param conNum
-     */
-    public void setConNum(int conNum) {
-        this.conNum = conNum;
-    }
-
-    /**
-     * @param none
-     * @return this.ticketType
-     */
-    public String getTicketType() {
-        return this.ticketType;
-    }
-
-    /**
-     * @return none
-     * @param ticketType
-     */
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
-    }
-
 }

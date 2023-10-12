@@ -1,394 +1,200 @@
-
 /**
- * @author Rafael Ayala
- * 
- * @since October 5, 2023
- * 
- * - CS 3331 - Advanced Object-Oriented Programming
- * 
- * - Dr. Daniel Mejia
- * 
- * - Programming Assignment 2
- * 
- * - Customer.java
- * 
- * - The following file defines a "Customer" class and its attributes.  There will also be collection 
- * structures (ArrayLists) to collect and store items for users, those items being the customer's invoices and tickets.
- * There are additional methods to manipulate and obtain values from these structures.
- * 
- * This work was done individually and completely on my own. I did not share, reproduce, or alter any part of this 
- * assignment for any purpose. I did not share code, upload this assignment online in any form, or 
- * view/received/modified code written from anyone else. All deliverables were produced entirely on my own. This 
- * assignment is part of an academic course at The University of Texas at El Paso and a grade will be assigned for 
- * the work I produced.
- * 
+ * @author Darien Booth 
+ * @version 1.2
  */
 
-import java.util.*;
+ //imports
+import java.util.ArrayList;
 
+/**
+ * Customer class for structuring information of a customer
+ */
 public class Customer {
 
     /**
-     * These are the attributes for every customer object
+     * Attributes for class
      */
-    private int id;
-    private String fName;
-    private String lName;
-    private double availableMoney;
-    private boolean ticketMinerMemb;
-    private String userName;
-    private String passWord;
-    private ArrayList<String> numOfPurchasedEvents = new ArrayList<String>();
-    private ArrayList<VipT> vipTickets = new ArrayList<VipT>();
-    private ArrayList<GoldT> goldTickets = new ArrayList<GoldT>();
-    private ArrayList<SilverT> silverTickets = new ArrayList<SilverT>();
-    private ArrayList<BronzeT> bronzeTickets = new ArrayList<BronzeT>();
-    private ArrayList<GeneralT> generalTickets = new ArrayList<GeneralT>();
-    private ArrayList<GeneralT> resExtraTickets = new ArrayList<GeneralT>();
-    private ArrayList<Invoice> customerInvoices = new ArrayList<Invoice>();
-    private double saved;
+    private int customerID;
+    private String firstName;
+    private String lastName;
+    private double moneyAvailable;
+    private int concertsPurchased;
+    private boolean membership;
+    private String username;
+    private String password;
+    private ArrayList<Invoice> invoice = new ArrayList<Invoice>(); 
 
     /**
-     * Constructor for a Customer object
-     * 
-     * @param none
+     * for creating instance of the class
      */
     public Customer() {
+
+    }
+
+    // created getters and setters for all attributes
+
+    /**
+     * getting id of customer
+     * @return integer of id
+     */
+    public int getCustomerID() {
+        return this.customerID;
     }
 
     /**
-     * Adds VIP tickets to a customer's VIP ticket ArrayList
-     * 
-     * @param ticketIn
-     * @return none
+     * setting id of customer
+     * @param customerID integer for id 
      */
-    public void addVIPTicket(VipT ticketIn) {
-        vipTickets.add(ticketIn);
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     /**
-     * Adds Events to a Customer's account; ArrayList of Customer events.
-     * 
-     * @param mapKey
+     * getting first name 
+     * @return string of first name 
      */
-    public void addEvent(String mapKey) {
-        if (!(numOfPurchasedEvents.contains(mapKey))) {
-            numOfPurchasedEvents.add(mapKey);
-        }
+    public String getFirstName() {
+        return this.firstName;
     }
 
     /**
-     * Adds Gold tickets to a customer's Gold ticket ArrayList
-     * 
-     * @param ticketIn
-     * @return none
+     * setting first name 
+     * @param firstName string for first name 
      */
-    public void addGoldTicket(GoldT ticketIn) {
-        goldTickets.add(ticketIn);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
-     * Adds Silver tickets to a customer's Silver ticket ArrayList
-     * 
-     * @param ticketIn
-     * @return none
+     * getting last name 
+     * @return string of last name 
      */
-    public void addSilverTicket(SilverT ticketIn) {
-        silverTickets.add(ticketIn);
+    public String getLastName() {
+        return this.lastName;
     }
 
     /**
-     * Adds Bronze tickets to a customer's Bronze ticket ArrayList
-     * 
-     * @param ticketIn
-     * @return none
+     * setting last name 
+     * @param lastName string for lastname 
      */
-    public void addBronzeTicket(BronzeT ticketIn) {
-        bronzeTickets.add(ticketIn);
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
-     * Adds General Admission tickets to a customer's General Admission ticket ArrayList
-     * 
-     * @param ticketIn
-     * @return none
+     * getting balance
+     * @return double of balance 
      */
-    public void addGeneralTicket(GeneralT ticketIn) {
-        generalTickets.add(ticketIn);
+    public double getMoneyAvailable() {
+        return this.moneyAvailable;
     }
 
     /**
-     * Adds invoices to a customer's Invoice ArrayList
-     * 
-     * @param invoiceIn
-     * @return none
+     * setting amount balance
+     * @param moneyAvailable double for balance
      */
-    public void addInvoice(Invoice invoiceIn) {
-        customerInvoices.add(invoiceIn);
+    public void setMoneyAvailable(double moneyAvailable) {
+        this.moneyAvailable = moneyAvailable;
     }
 
     /**
-     * Prints all of the information of every invoice a customer has, if they have
-     * any.
-     * 
-     * @param none
-     * @return none
+     * getting total of concerts purchased 
+     * @return integer of total 
      */
-    public void printInvoices() {
-        System.out.println("Invoices: " + customerInvoices.size());
-        for (int i = 0; i < customerInvoices.size(); i++) {
-            Invoice temp = customerInvoices.get(i);
-            System.out.println("Customer Last Name and Event Name: " + temp.getCustomerLastNameandEventName()
-                    + ", Confirmation Number: " + temp.getConNum()
-                    + ", Type: " + temp.getTicketType() + ", Quantity: " + temp.getTicketQuantity() + ", Total: "
-                    + temp.getTotal());
-        }
+    public int getConcertsPurchased() {
+        return this.concertsPurchased;
     }
 
     /**
-     * The following method simply prints the number of tickets of each type that a
-     * customer has and the
-     * information of each ticket.
-     * 
-     * @param none
-     * @return none
+     * setting total concerts purchased 
+     * @param concertsPurchased integer for total 
      */
-    public void printTicketList() {
-
-        System.out.println("VIP Tickets: " + vipTickets.size());
-        if (1 <= vipTickets.size()) {
-            for (int i = 0; i < vipTickets.size(); i++) {
-                VipT temp = vipTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
-
-        System.out.println();
-
-        System.out.println("Gold Tickets: " + goldTickets.size());
-        if (1 <= goldTickets.size()) {
-            for (int i = 0; i < goldTickets.size(); i++) {
-                GoldT temp = goldTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
-
-        System.out.println();
-
-        System.out.println("Silver Tickets: " + silverTickets.size());
-        if (1 <= silverTickets.size()) {
-            for (int i = 0; i < silverTickets.size(); i++) {
-                SilverT temp = silverTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
-
-        System.out.println();
-
-        System.out.println("Bronze Tickets: " + bronzeTickets.size());
-        if (1 <= bronzeTickets.size()) {
-            for (int i = 0; i < bronzeTickets.size(); i++) {
-                BronzeT temp = bronzeTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
-
-        System.out.println();
-
-        System.out.println("General Tickets: " + generalTickets.size());
-        if (1 <= generalTickets.size()) {
-            for (int i = 0; i < generalTickets.size(); i++) {
-                GeneralT temp = generalTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
-
-        System.out.println();
-
-        System.out.println("Reserved Extra Tickets: " + resExtraTickets.size());
-        if (1 <= resExtraTickets.size()) {
-            for (int i = 0; i < resExtraTickets.size(); i++) {
-                GeneralT temp = resExtraTickets.get(i);
-                System.out.println("ID and Name: " + temp.getId() + ", Price: " + temp.getTicketPrice());
-            }
-        }
+    public void setConcertsPurchased(int concertsPurchased) {
+        this.concertsPurchased = concertsPurchased;
     }
 
     /**
-     * The following method will take the 2D array obtained from the customer list
-     * csv file and convert each row into a "Customer" object.
-     * 
-     * @param customers
-     * @return customer
+     * getting membership status
+     * @return boolean of status
      */
-    public Customer generateCustomer(String[][] customers, int i) {
-
-        Customer customer = new Customer();
-        ColumnAttributes customerAtts = new ColumnAttributes();
-
-        String[] customerInfoRow = customers[i];
-        customer.setID(Integer.parseInt(customerInfoRow[customerAtts.searchForIDCol(customers)]));
-        customer.setFName(customerInfoRow[customerAtts.searchForFNameCol(customers)]);
-        customer.setLName(customerInfoRow[customerAtts.searchForLNameCol(customers)]);
-        customer.setAvailableMoney(Double.valueOf(customerInfoRow[customerAtts.searchForMoneyAvailCol(customers)]));
-        if (customerInfoRow[customerAtts.searchForMemberCol(customers)].equalsIgnoreCase("TRUE")) {
-            customer.setTMMS(true);
-        } else {
-            customer.setTMMS(false);
-        }
-        customer.setUserN(customerInfoRow[customerAtts.searchForUNameCol(customers)]);
-        customer.setPassW(customerInfoRow[customerAtts.searchForPassWCol(customers)]);
-
-        return customer;
+    public boolean getMembership() {
+        return this.membership;
     }
 
     /**
-     * Gets savings due to TM Membership
-     * @return
+     * setting membership status
+     * @param membership boolean for status
      */
-    public double getSaved() {
-        return saved;
+    public void setMembership(boolean membership) {
+        this.membership = membership;
     }
 
     /**
-     * Sets savings due to TM Membership
-     * @param saved
+     * getting username
+     * @return string of username
      */
-    public void setSaved(double saved) {
-        this.saved = saved;
+    public String getUsername() {
+        return this.username;
     }
 
     /**
-     * Getter for Customer ID
-     * @param none
-     * @return this.id
+     * setting username 
+     * @param username string for username
      */
-    public int getID() {
-        return this.id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * Setter for Customer ID
-     * @param id
-     * @return none
+     * getting password
+     * @return string of password
      */
-    public void setID(int id) {
-        this.id = id;
+    public String getPassword() {
+        return this.password;
     }
 
     /**
-     * Getter for Customer First Name
-     * @param none
-     * @return this.fName
+     * setting password 
+     * @param password string for password 
      */
-    public String getFName() {
-        return this.fName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
-     * Setter for Customer First Name
-     * @param fName
-     * @return none
+     * getting invoice infomration 
      */
-    public void setFName(String fName) {
-        this.fName = fName;
+    public void getInvoice() {
+        for(int i = 0; i < invoice.size(); i++) {
+            this.invoice.get(i).printInvoice();
+        } 
     }
 
     /**
-     * Getter for Customer Last Name
-     * @param none
-     * @return this.lName
+     * setting an invoice
+     * @param invoice structure of invoice
      */
-    public String getLName() {
-        return this.lName;
+    public void setInvoice(Invoice invoice) {
+        this.invoice.add(invoice); 
     }
 
     /**
-     * Setter for Customer Last Name
-     * @param lName
-     * @return none
+     * printing information of a customer
      */
-    public void setLName(String lName) {
-        this.lName = lName;
+    public void printInfo() {
+        System.out.println("-----Account Info-----");
+        System.out.println(this.firstName + this.lastName);
+        System.out.println("Membership: " + this.membership);
+        System.out.println("Balance: " + String.format("%.2f",this.moneyAvailable));
+        System.out.println("Concerts Purchased: " + this.concertsPurchased);
+        System.out.println("-------------------------");
     }
 
     /**
-     * Getter for Customer balance
-     * @param none
-     * @return this.availableMoney
+     * making a purchase 
+     * @param amount double for how much the purchase is 
      */
-    public double getAvailableMoney() {
-        return this.availableMoney;
-    }
-
-    /**
-     * Setter for Customer balance
-     * @param availableMoney
-     * @return none
-     */
-    public void setAvailableMoney(double availableMoney) {
-        this.availableMoney = availableMoney;
-    }
-
-    /**
-     * Getter for Customer TM Membership
-     * @param none
-     * @return this.ticketMinerMeb
-     */
-    public boolean getTMMS() {
-        return this.ticketMinerMemb;
-    }
-
-    /**
-     * Setter for Customer TM Membership
-     * @param ticketMinerMemb
-     * @return none
-     */
-    public void setTMMS(boolean ticketMinerMemb) {
-        this.ticketMinerMemb = ticketMinerMemb;
-    }
-
-    /**
-     * Getter for Customer Username
-     * @param none
-     * @return this.userName
-     */
-    public String getUserN() {
-        return this.userName;
-    }
-
-    /**
-     * Setter for Customer Username
-     * @param userName
-     * @return none
-     */
-    public void setUserN(String userName) {
-        this.userName = userName;
-    }
-
-    /**
-     * Getter for Customer Password
-     * @param none
-     * @return this.passWord
-     */
-    public String getPassW() {
-        return this.passWord;
-    }
-
-    /**
-     * Setter for Customer Password
-     * @param passWord
-     * @return none
-     */
-    public void setPassW(String passWord) {
-        this.passWord = passWord;
-    }
-
-    /**
-     * Returns the number of events a Customer has purchased for.
-     * @return
-     */
-    public int getNumOfPurchasedEvents() {
-        return this.numOfPurchasedEvents.size();
+    public void purchase(double amount) {
+        this.moneyAvailable -= amount;
     }
 }
