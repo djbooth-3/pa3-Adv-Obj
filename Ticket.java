@@ -104,4 +104,101 @@ public abstract class Ticket {
         this.id = id;
     }
 
+    /**
+     * Given a user's purchase choices, a new invoice will be created, and all of the 
+     * appropriate attributes for a customer and event will be adjusted given the 
+     * user's choices of purchasing a ticket.  This includes the customer's
+     * balance and invoice/ticket collection, the event's 
+     * availability values and ticket collections, and the venue's availability.
+     * Activity will be written to an output file.
+     * @param event
+     * @param customer
+     * @param mapKey
+     * @param tQty
+     * @param invoice
+     */
+    public void processTicketPurchase(Event event, Customer customer, String mapKey, int tQty, Invoice invoice, String ticketType) {
+
+        double totalPrice = (event.getVipPrice() * tQty);
+        double tax = totalPrice * 0.0825;
+        double totalPricewithDiscount = totalPrice * 0.9;
+        double taxWithDiscount = totalPricewithDiscount * 0.0825;
+        if(customer.getTMMS() == true){
+            invoice.setTotal(totalPricewithDiscount + taxWithDiscount);
+            customer.setAvailableMoney(customer.getAvailableMoney() - invoice.getTotal());
+            customer.setSaved(customer.getSaved() + totalPricewithDiscount*0.1);
+            event.setTaxCharged(event.getTaxCharged() + taxWithDiscount);
+            event.setVipRev(event.getVipRev() + invoice.getTotal());
+        } else {
+            invoice.setTotal(totalPrice + tax);
+            customer.setAvailableMoney(customer.getAvailableMoney() - invoice.getTotal());
+            event.setTaxCharged(event.getTaxCharged() + tax);
+            event.setVipRev(event.getVipRev() + invoice.getTotal());
+        }
+        invoice.setCustomerLastNameandEventName(customer.getLName() + ", " + event.getEventName());
+        invoice.setTicketQuantity(tQty);
+        invoice.setTicketType(ticketType);
+        invoice.setConNum((int) (Math.random() * 99999999));
+
+        if(ticketType.equalsIgnoreCase("Vip")){
+            VipT vip = new VipT();
+            vip.setTName(ticketType);
+            vip.setTicketPrice(event.getVipPrice());
+            vip.setId(mapKey);
+            for(int i = 0; i < tQty; i++){
+                customer.addVIPTicket(vip);
+                event.addVip(vip);
+            }
+        } else if (ticketType.equalsIgnoreCase("Gold")){
+            GoldT gold = new GoldT();
+            gold.setTName(ticketType);
+            gold.setTicketPrice(event.getGoldPrice());
+            gold.setId(mapKey);
+            for(int i = 0; i < tQty; i++){
+                customer.addGoldTicket(gold);
+                event.addGold(gold);
+            }
+        } else if (ticketType.equalsIgnoreCase("Silver")){
+            SilverT silver = new SilverT();
+            silver.setTName(ticketType);
+            silver.setTicketPrice(event.getSilverPrice());
+            silver.setId(mapKey);
+            for(int i = 0; i < tQty; i++){
+                customer.addSilverTicket(silver);
+                event.addSilver(silver);
+            }
+        } else if (ticketType.equalsIgnoreCase("Bronze")){
+            BronzeT bronze = new BronzeT();
+            bronze.setTName(ticketType);
+            bronze.setTicketPrice(event.getBronzePrice());
+            bronze.setId(mapKey);
+            for(int i = 0; i < tQty; i++){
+                customer.addBronzeTicket(bronze);
+                event.addBronze(bronze);
+            }
+        } else {
+            GeneralT general = new GeneralT();
+            general.setTName(ticketType);
+            general.setTicketPrice(event.getBronzePrice());
+            general.setId(mapKey);
+            for(int i = 0; i < tQty; i++){
+                customer.addGeneralTicket(general);
+                event.addGeneral(general);
+            }
+        }
+
+        event.getVenue().setSeatsUn(event.getVenue().getSeatsUn() + (tQty/event.getVenue().getCapacity()));
+
+        customer.addInvoice(invoice);
+
+        customer.addEvent(mapKey);
+
+        WriteToFile textFile = new WriteToFile();
+        textFile.writeToOutputFile(customer, tQty, ticketType, event, customer.getAvailableMoney(), mapKey);
+
+        // This message will be printed to signify a valid transaction.
+        System.out.println("Thank you for using TicketMiner!");
+
+    }
+
 }

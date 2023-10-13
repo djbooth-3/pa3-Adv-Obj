@@ -1,3 +1,4 @@
+
 /**
  * @author Rafael Ayala
  * 
@@ -45,6 +46,7 @@ public class CSVtoStructure {
      * The following method will convert the EventList to a HashMap
      * where each key is a string consisting of the Event's ID and Name, and each
      * value is a String ArrayList containing each of the attributes of the event.
+     * 
      * @param fileName
      * @return
      */
@@ -53,24 +55,34 @@ public class CSVtoStructure {
         // The String arraylist will store rows of the csv file.
         HashMap<String, ArrayList<String>> hm = new HashMap<>();
 
+        ColumnAttributes headerAttributes = new ColumnAttributes();
+
         try {
             String noe; // As in "number of events"
+            String [] header = null;
 
             BufferedReader br1 = new BufferedReader(
                     new FileReader(
                             fileName));
 
+            String headerRow;
+            if ((headerRow = br1.readLine()) != null) {
+                header = headerRow.split(","); // Assuming CSV uses commas as separators
+                ArrayList<String> headerAsAL = new ArrayList<>(Arrays.asList(header));
+                hm.put("Event ID Name", headerAsAL);
+            }
+
             while ((noe = br1.readLine()) != null) {
                 String[] eventRow = noe.split(","); // Assuming CSV uses commas as separators
 
                 // Check if the line has enough parts (e.g., key and value)
-                if (eventRow.length >= 7) {
-                    String key = eventRow[6].trim() + " " + eventRow[1].trim();
+                if (eventRow.length >= 2) {
+                    String key = eventRow[headerAttributes.searchForIDColArrayVersion(header)].trim() + " " + eventRow[headerAttributes.searchForNameColArrayVersion(header)].trim();
 
                     ArrayList<String> stringValue = new ArrayList<String>();
 
                     // Build the value from the remaining parts
-                    for (int i = 1; i < eventRow.length; i++) {
+                    for (int i = 0; i < eventRow.length; i++) {
                         stringValue.add(eventRow[i]);
                     }
 
@@ -90,8 +102,9 @@ public class CSVtoStructure {
     }
 
     /**
-     * The following method will convert the CustomerList csv file to an 
+     * The following method will convert the CustomerList csv file to an
      * ArrayList of Customer objects.
+     * 
      * @param fileName
      * @return
      */

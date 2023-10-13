@@ -27,6 +27,7 @@
  */
 
 import java.util.*;
+import java.lang.*;
 
 public class ColumnAttributes {
 
@@ -34,6 +35,31 @@ public class ColumnAttributes {
      * Constructor for ColumnAttributes
      */
     public ColumnAttributes(){}
+
+    /**
+     * Will return the column number in the header row corresponding to the "ID" column
+     * @param headerRow
+     * @return
+     */
+    public int searchForIDColArrayVersion(String [] headerRow){
+        int i;
+        for (i = 0; i < headerRow.length; i++) {
+            if (headerRow[i].equalsIgnoreCase("Event ID")) {
+                return i;
+            }
+        }
+        return i;
+    }
+
+    public int searchForNameColArrayVersion(String [] headerRow){
+        int i;
+        for (i = 0; i < headerRow.length; i++) {
+            if (headerRow[i].equalsIgnoreCase("Name")) {
+                return i;
+            }
+        }
+        return i;
+    }
 
     /**
      * Will return the column number with the ID attribute of an event

@@ -58,6 +58,8 @@ public class ProcessPurchase {
     public void processPurchase(Customer customer,
             Event event, String mapKey) {
 
+        Factory ticketFactory = new Factory();
+
         boolean validTicketProcess = false;
 
         Invoice invoice = new Invoice();
@@ -83,8 +85,8 @@ public class ProcessPurchase {
                             && event.getVenue().getSeatsUn() != 100
                             && (event.getVenue().getVIPPct() / 100) * event.getVenue().getCapacity() != 0) {
 
-                        VipT vip = new VipT();
-                        vip.processVIPPurchase(event, customer, mapKey, vQty, invoice);
+                        Ticket vip = ticketFactory.createTicket("Vip");
+                        vip.processTicketPurchase(event, customer, mapKey, vQty, invoice, "Vip");
                         validTicketProcess = true;
                         break;
                     }
@@ -96,8 +98,8 @@ public class ProcessPurchase {
                             && event.getVenue().getSeatsUn() != 100
                             && (event.getVenue().getGoldPct() / 100) * event.getVenue().getCapacity() != 0) {
 
-                        GoldT gold = new GoldT();
-                        gold.processGoldPurchase(event, customer, mapKey, gQty, invoice);
+                        Ticket gold = ticketFactory.createTicket("Gold");
+                        gold.processTicketPurchase(event, customer, mapKey, gQty, invoice, "Gold");
 
                         validTicketProcess = true;
                         break;
@@ -110,8 +112,8 @@ public class ProcessPurchase {
                             && event.getVenue().getSeatsUn() != 100
                             && (event.getVenue().getSilverPct() / 100) * event.getVenue().getCapacity() != 0) {
 
-                        SilverT silver = new SilverT();
-                        silver.processSilverPurchase(event, customer, mapKey, sQty, invoice);
+                        Ticket silver = ticketFactory.createTicket("Silver");
+                        silver.processTicketPurchase(event, customer, mapKey, sQty, invoice, "Silver");
                         validTicketProcess = true;
                         break;
                     }
@@ -123,8 +125,8 @@ public class ProcessPurchase {
                             && event.getVenue().getSeatsUn() != 100
                             && (event.getVenue().getBronzePct() / 100) * event.getVenue().getCapacity() != 0) {
 
-                        BronzeT bronze = new BronzeT();
-                        bronze.processBronzePurchase(event, customer, mapKey, bQty, invoice);
+                        Ticket bronze = ticketFactory.createTicket("Bronze");
+                        bronze.processTicketPurchase(event, customer, mapKey, bQty, invoice, "Bronze");
 
                         validTicketProcess = true;
                         break;
@@ -139,8 +141,8 @@ public class ProcessPurchase {
                             && (event.getVenue().getGenPct() / 100) * event.getVenue().getCapacity() != 0
                             && (event.getVenue().getResPct() / 100) * event.getVenue().getCapacity() != 0) {
 
-                        GeneralT general = new GeneralT();
-                        general.processGeneralPurchase(event, customer, mapKey, genQty, invoice);
+                        Ticket general = ticketFactory.createTicket("General Admission");
+                        general.processTicketPurchase(event, customer, mapKey, genQty, invoice, "General Admission");
 
                         validTicketProcess = true;
 

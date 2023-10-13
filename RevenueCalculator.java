@@ -92,6 +92,6 @@ public class RevenueCalculator {
 
         double ticketTotal = expVipProfit + expGoldProfit + expSilverProfit + expBronzeProfit + expGeneralProfit;
 
-        return (Math.floor(ticketTotal - event.getVenue().getCost() - event.getFireWorksCost())*100)/100;
+        return (Math.floor((ticketTotal - event.getVenue().getCost() - event.getFireWorksCost() - (ticketTotal*0.0825))*100))/100;
     }
 }

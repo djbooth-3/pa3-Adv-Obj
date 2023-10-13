@@ -1,13 +1,13 @@
 /**
  * @author Rafael Ayala
  * 
- * @since October 5, 2023
+ * @since October 12, 2023
  * 
  *        - CS 3331 - Advanced Object-Oriented Programming
  * 
  *        - Dr. Daniel Mejia
  * 
- *        - Programming Assignment 2
+ *        - Programming Assignment 3
  * 
  *        - Auditorium.java
  * 

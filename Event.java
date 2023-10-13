@@ -25,6 +25,7 @@
 
 import java.util.*;
 import java.text.*;
+import java.lang.*;
 
 public abstract class Event {
     /**
@@ -44,6 +45,11 @@ public abstract class Event {
     private double bronzePrice;
     private double generalPrice;
     private double taxCharged;
+    private double vipRev;
+    private double goldRev;
+    private double silverRev;
+    private double bronzeRev;
+    private double genRev;
     private ArrayList<VipT> vipTicketsPurchased = new ArrayList<VipT>();
     private ArrayList<GoldT> goldTicketsPurchased = new ArrayList<GoldT>();
     private ArrayList<SilverT> silverTicketsPurchased = new ArrayList<SilverT>();
@@ -389,7 +395,86 @@ public abstract class Event {
         this.generalPrice = generalPrice;
     }
 
-    
+    /**
+     * Getter for Vip revenue
+     * @return
+     */
+    public double getVipRev() {
+        return vipRev;
+    }
+
+    /**
+     * Setter for Vip Revenue
+     * @param vipRev
+     */
+    public void setVipRev(double vipRev) {
+        this.vipRev = vipRev;
+    }
+
+    /**
+     * Getter for Gold Revenue
+     * @return
+     */
+    public double getGoldRev() {
+        return goldRev;
+    }
+
+    /**
+     * Setter for Gold Revenue
+     * @param goldRev
+     */
+    public void setGoldRev(double goldRev) {
+        this.goldRev = goldRev;
+    }
+
+    /**
+     * Getter for Silver Revenue
+     * @return
+     */
+    public double getSilverRev() {
+        return silverRev;
+    }
+
+    /**
+     * Setter for Silver Revenue
+     * @param silverRev
+     */
+    public void setSilverRev(double silverRev) {
+        this.silverRev = silverRev;
+    }
+
+    /**
+     * Getter for Bronze Revenue
+     * @return
+     */
+    public double getBronzeRev() {
+        return bronzeRev;
+    }
+
+    /**
+     * Setter for Bronze Revenue
+     * @param bronzeRev
+     */
+    public void setBronzeRev(double bronzeRev) {
+        this.bronzeRev = bronzeRev;
+    }
+
+    /**
+     * Getter for General Admission Revenue
+     * @return
+     */
+    public double getGenRev() {
+        return genRev;
+    }
+
+    /**
+     * Setter for General Admission Revenue
+     * @param genRev
+     */
+    public void setGenRev(double genRev) {
+        this.genRev = genRev;
+    }
+
     /**
      * The following method will simply print all of the event information of an
      * event.
@@ -403,13 +488,7 @@ public abstract class Event {
 
         RevenueCalculator revenueCalc = new RevenueCalculator();
 
-        double vipRev = revenueCalc.getVipRev(event);
-        double goldRev = revenueCalc.getGoldRev(event);
-        double silverRev = revenueCalc.getSilverRev(event);
-        double bronzeRev = revenueCalc.getBronzeRev(event);
-        double genRev = revenueCalc.getGenRev(event);
-
-        double totalRev = vipRev + goldRev + silverRev + bronzeRev + genRev;
+        double totalRev = event.getVipRev() + event.getGoldRev() + event.getSilverRev() + event.getBronzeRev() + event.getGenRev();
 
         System.out.println("ID and Name: "+eventKey);
         System.out.println("Date: " + event.getDate());
@@ -427,19 +506,18 @@ public abstract class Event {
         System.out.println("Total Bronze seats sold: " + event.getSoldBronze()+", Remaining: "+(((event.getVenue().getBronzePct()/100)*event.getVenue().getCapacity()) - event.getSoldBronze()));
         System.out.println("Total General Admission seats sold: " + event.getSoldGen()+", Remaining: "+(((event.getVenue().getGenPct()/100)*event.getVenue().getCapacity()) - event.getSoldGen()));
         
-        System.out.println("Total seats remaining: "+ (event.getVenue().getCapacity() - event.getTotalSold()));
         double expectedProfit = revenueCalc.getExpectedProfit(event);
         DecimalFormat expectedProfitUgly = new DecimalFormat("#,##0");
         String expectedProfitNice = expectedProfitUgly.format(expectedProfit);
 
-        System.out.println("Total revenue for VIP tickets: $" + vipRev);
-        System.out.println("Total revenue for Gold tickets: $" + goldRev);
-        System.out.println("Total revenue for Silver tickets: $" + silverRev);
-        System.out.println("Total revenue for Bronze tickets: $" + bronzeRev);
-        System.out.println("Total revenue for General Admission tickets: $" + genRev);
-        System.out.println("Total revenue for all tickets: $"+totalRev);
+        System.out.println("Total revenue for VIP tickets: $" + Math.floor(event.getVipRev()*100)/100);
+        System.out.println("Total revenue for Gold tickets: $" + Math.floor(event.getGoldRev()*100)/100);
+        System.out.println("Total revenue for Silver tickets: $" + Math.floor(event.getSilverRev()*100)/100);
+        System.out.println("Total revenue for Bronze tickets: $" + Math.floor(event.getBronzeRev()*100)/100);
+        System.out.println("Total revenue for General Admission tickets: $" + Math.floor(event.getGenRev()*100)/100);
+        System.out.println("Total revenue for all tickets: $"+Math.floor(totalRev*100)/100);
         System.out.println("Expected Profit(Sell Out) $"+expectedProfitNice);
-        System.out.println("Actual Profit: " + (totalRev - event.getVenue().getCost() - event.getFireWorksCost()));
-        System.out.println("Total tax charged: $"+event.getTaxCharged());
+        System.out.println("Actual Profit: " + Math.floor((totalRev - event.getVenue().getCost() - event.getFireWorksCost() - (totalRev*0.0825))*100)/100);
+        System.out.println("Total tax charged: $"+(Math.floor(event.getTaxCharged()*100))/100);
     }
 }

@@ -25,6 +25,7 @@
  */
 
 import java.util.*;
+import java.lang.*;
 
 public class Customer {
 
@@ -140,8 +141,8 @@ public class Customer {
             Invoice temp = customerInvoices.get(i);
             System.out.println("Customer Last Name and Event Name: " + temp.getCustomerLastNameandEventName()
                     + ", Confirmation Number: " + temp.getConNum()
-                    + ", Type: " + temp.getTicketType() + ", Quantity: " + temp.getTicketQuantity() + ", Total: "
-                    + temp.getTotal());
+                    + ", Type: " + temp.getTicketType() + ", Quantity: " + temp.getTicketQuantity() + ", Total: $"
+                    + (Math.floor(temp.getTotal()*100))/100);
         }
     }
 
