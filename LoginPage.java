@@ -43,6 +43,26 @@ public class LoginPage {
     }
 
     /**
+     * Checks that the information on a customer is correct
+     * @param customerList arraylist of customers that contains their information
+     * @param s string containing what needs to be checked
+     * @param n integer that is the id of the individual 
+     * @return returns true or false if information is present or correct
+     */
+    public static boolean infoCheck(ArrayList<Customer> customerList, String info, int id) {
+        if(info.equals(customerList.get(id).getLName())) { // checks last name is correct
+            return true; 
+        }
+        else if(info.equals(customerList.get(id).getUserN())) { // checks username is correct
+            return true; 
+        }
+        else if(info.equals(customerList.get(id).getPassW())) { // checks password is correct 
+            return true; 
+        }
+        return false; 
+    }
+
+    /**
      * The following method will run at the start of the run of the system.  If the user
      * identifies as a standard user,  the user logs in and, if their information is valid, the respective
      * customer information will be returned.  Otherwise, if they identify as an administrator,
@@ -102,44 +122,59 @@ public class LoginPage {
             }
         }
 
-        boolean customerExists = false;
         Customer customer = new Customer();
+        int state = 0; 
+        int id = 0; 
 
-        while (!customerExists) {
-            // Prompt the user to enter their first name
-            System.out.print(
-                    "Please enter your first name, then hit 'ENTER'.\nEnter your last name, then hit 'ENTER'.\nEnter your username, then hit 'ENTER'.\nLastly, enter your password, then hit 'ENTER'.\nPlease do so in that order.");
-            System.out.println();
-            String fnInput = System.console().readLine();
-            String lnInput = System.console().readLine();
-            String unInput = System.console().readLine();
-            String pwInput = System.console().readLine();
-
-            // Check if all entered values exist in the ArrayList
-            for (int i = 0; i < customerList.size(); i++) {
-                String firstName = customerList.get(i).getFName();
-                String lastName = customerList.get(i).getLName();
-                String userName = customerList.get(i).getUserN();
-                String passWord = customerList.get(i).getPassW();
-                if (fnInput.equalsIgnoreCase(firstName) && lnInput.equalsIgnoreCase(lastName)
-                        && unInput.equals(userName) && pwInput.equals(passWord)) {
-
-                    // By this point, we have all the information to obtain the Customer object to
-                    // work with.
-                    customer = customerList.get(i);
-
-                    customerExists = true;
+        boolean loop = true; // too keep loop for switch statement
+        while(loop) {
+            switch(state) {
+                case 0: // first name 
+                    System.out.println("Please enter your first name:");
+                    String fn = System.console().readLine(); 
+                    for(int x = 0; x < customerList.size(); x++) {
+                        if(fn.equals(customerList.get(x).getFName())) {
+                            state = 1; // transition to next state
+                            id = x; // set id for the user
+                        }
+                    }
+                    if(state == 0) {
+                        System.out.println("First name not found! Please try again."); // first name does not exist   
+                    } 
                     break;
+                case 1: // last name
+                    System.out.println("Please enter your last name:");
+                    String ln = System.console().readLine();
+                    if(!infoCheck(customerList, ln, id)) {
+                        System.out.println("Last name not found! Please try again."); // last name is not found
+                        break; 
+                    }
+                    state = 2; // transition to next state if correct
+                    break;
+                case 2: // username
+                    System.out.println("Please enter your username:");
+                    String usr = System.console().readLine();
+                    if(!infoCheck(customerList, usr, id)) {
+                        System.out.println("Username Incorrect! Please try again."); // username is incorrect
+                        break; 
+                    }
+                    state = 3;
+                    break; // transition to next state if correct
+                case 3: // password
+                    System.out.println("Please enter your password:");
+                    String pas = System.console().readLine();
+                    if(!infoCheck(customerList, pas, id)) {
+                        System.out.println("Password Incorrect! Please try again."); // password is incorrect
+                        break; 
+                    }
+                    loop = false; // everything is correctly answered so stop loop and move on
+                    break; // exit 
                 }
             }
-
-            if (!customerExists) {
-                System.out.println("Try again: ");
-            }
+            // Darien's res.add 
+            //res.add(customers.get(id).getFirstName() + " " + customers.get(id).getLastName() + " has logged in."); // add action of who logged in\
+            customer = customerList.get(id); 
+            return customer;
         }
-
-        return customer;
-
-    }
 
 }
