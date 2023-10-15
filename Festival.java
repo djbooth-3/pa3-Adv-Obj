@@ -51,26 +51,17 @@ public class Festival extends Event {
 
         Festival festival = new Festival();
 
+        MakeVenue makevenue = new MakeVenue();
+
         ColumnAttributes festivalAtts = new ColumnAttributes();
 
-        festival.setEventName(events.get(festivalAtts.searchForNameCol(attributes)));
-        festival.setDate(events.get(festivalAtts.searchForDateCol(attributes)));
-        festival.setTime(events.get(festivalAtts.searchForTimeCol(attributes)));
+        festival.setname(events.get(festivalAtts.searchForNameCol(attributes)));
+        festival.setdate(events.get(festivalAtts.searchForDateCol(attributes)));
+        festival.settime(events.get(festivalAtts.searchForTimeCol(attributes)));
         festival.setEventType(events.get(festivalAtts.searchForEventTypeCol(attributes)));
-        if (events.size() <= 20) {
-            festival.setFireworks("No");
-            festival.setFireWorksCost(0.0);
-        } else if (events.get(festivalAtts.searchForFireWorksCol(attributes)).equalsIgnoreCase("Yes")) {
-            festival.setFireworks("Yes");
-            festival.setFireWorksCost(Double.valueOf(events.get(festivalAtts.searchForFireWorksCostCol(attributes))));
-        } else {
-            festival.setFireworks("No");
-            festival.setFireWorksCost(0.0);
-        }
-        Venue venue = new Venue();
-        festival.setVenue(venue.obtainVenue(events, attributes));
-        festival.getVenue().setSeatsUn(Double.valueOf(events.get(festivalAtts.searchForPctSeatsUn(attributes))));
-        festival.getVenue().setVIPPct(Double.valueOf(events.get(festivalAtts.searchForVIPPctCol(attributes))));
+        festival.setVenue(makevenue.makeVenue(events, attributes));
+        festival.getVenue().setSeatsUA(Double.valueOf(events.get(festivalAtts.searchForPctSeatsUn(attributes))));
+        festival.getVenue().setVipPct(Double.valueOf(events.get(festivalAtts.searchForVIPPctCol(attributes))));
         festival.getVenue().setGoldPct(Double.valueOf(events.get(festivalAtts.searchForGoldPctCol(attributes))));
         festival.getVenue().setSilverPct(Double.valueOf(events.get(festivalAtts.searchForSilverPctCol(attributes))));
         festival.getVenue().setBronzePct(Double.valueOf(events.get(festivalAtts.searchForBronzePctCol(attributes))));
@@ -80,7 +71,7 @@ public class Festival extends Event {
         festival.setGoldPrice(Double.valueOf(events.get(festivalAtts.searchForGoldCol(attributes))));
         festival.setSilverPrice(Double.valueOf(events.get(festivalAtts.searchForSilverCol(attributes))));
         festival.setBronzePrice(Double.valueOf(events.get(festivalAtts.searchForBronzeCol(attributes))));
-        festival.setGeneralPrice(Double.valueOf(events.get(festivalAtts.searchForGeneralCol(attributes))));
+        festival.setGenAdmPrice(Double.valueOf(events.get(festivalAtts.searchForGeneralCol(attributes))));
 
         return festival;
 
@@ -126,7 +117,7 @@ public class Festival extends Event {
                     
                         Festival originalConcert = concertMap.remove(eventKey);
                         concertMap.put(newKey, originalConcert);
-                        originalConcert.setEventName(newName);
+                        originalConcert.setname(newName);
                         adminModification.writeAdminActivity(newKey+" and modified the name.");
                         break;
                     // Change an event's date
@@ -134,7 +125,7 @@ public class Festival extends Event {
                         
                         System.out.println("Now enter the date you want to change this event to:");
                         String newDate = System.console().readLine();
-                        festival.setDate(newDate);
+                        festival.setdate(newDate);
                         adminModification.writeAdminActivity(eventKey+" and modified the date.");
                         break;
                     // Change an event's time
@@ -142,7 +133,7 @@ public class Festival extends Event {
                         
                         System.out.println("Now enter the time you want to change this event to:");
                         String newTime = System.console().readLine();
-                        festival.setTime(newTime);
+                        festival.settime(newTime);
                         adminModification.writeAdminActivity(eventKey+" and modified the time.");
                         
                         break;
@@ -192,7 +183,7 @@ public class Festival extends Event {
                         System.out.println(
                                 "Now enter the General Price you want to change this event to (include '.', even if the cents amount is 0):");
                         double newGeneral = Double.valueOf(System.console().readLine());
-                        festival.setGeneralPrice(newGeneral);
+                        festival.setGenAdmPrice(newGeneral);
                         adminModification.writeAdminActivity(eventKey+" and modified the General Price.");
                         
                         break;

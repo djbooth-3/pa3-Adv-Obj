@@ -81,9 +81,9 @@ public class ProcessPurchase {
                 case 1:
                     System.out.println("How many VIP tickets?");
                     int vQty = Integer.parseInt(System.console().readLine());
-                    if (1 <= vQty && vQty <= 6 && (event.getVipPrice()) * vQty <= (customer.getAvailableMoney())
-                            && event.getVenue().getSeatsUn() != 100
-                            && (event.getVenue().getVIPPct() / 100) * event.getVenue().getCapacity() != 0) {
+                    if (1 <= vQty && vQty <= 6 && (event.getVipPrice()) * vQty <= (customer.getMoneyAvailable())
+                            && event.getVenue().getPctSeatsUA() != 100
+                            && (event.getVenue().getVipPct() / 100) * event.getVenue().getCapacity() != 0) {
 
                         Ticket vip = ticketFactory.createTicket("Vip");
                         vip.processTicketPurchase(event, customer, mapKey, vQty, invoice, "Vip");
@@ -94,8 +94,8 @@ public class ProcessPurchase {
                 case 2:
                     System.out.println("How many Gold tickets?");
                     int gQty = Integer.parseInt(System.console().readLine());
-                    if (1 <= gQty && gQty <= 6 && (event.getGoldPrice()) * gQty <= (customer.getAvailableMoney())
-                            && event.getVenue().getSeatsUn() != 100
+                    if (1 <= gQty && gQty <= 6 && (event.getGoldPrice()) * gQty <= (customer.getMoneyAvailable())
+                            && event.getVenue().getPctSeatsUA() != 100
                             && (event.getVenue().getGoldPct() / 100) * event.getVenue().getCapacity() != 0) {
 
                         Ticket gold = ticketFactory.createTicket("Gold");
@@ -108,8 +108,8 @@ public class ProcessPurchase {
                 case 3:
                     System.out.println("How many Silver tickets?");
                     int sQty = Integer.parseInt(System.console().readLine());
-                    if (1 <= sQty && sQty <= 6 && (event.getSilverPrice()) * sQty <= (customer.getAvailableMoney())
-                            && event.getVenue().getSeatsUn() != 100
+                    if (1 <= sQty && sQty <= 6 && (event.getSilverPrice()) * sQty <= (customer.getMoneyAvailable())
+                            && event.getVenue().getPctSeatsUA() != 100
                             && (event.getVenue().getSilverPct() / 100) * event.getVenue().getCapacity() != 0) {
 
                         Ticket silver = ticketFactory.createTicket("Silver");
@@ -121,8 +121,8 @@ public class ProcessPurchase {
                 case 4:
                     System.out.println("How many Bronze tickets?");
                     int bQty = Integer.parseInt(System.console().readLine());
-                    if (1 <= bQty && bQty <= 6 && (event.getBronzePrice()) * bQty <= (customer.getAvailableMoney())
-                            && event.getVenue().getSeatsUn() != 100
+                    if (1 <= bQty && bQty <= 6 && (event.getBronzePrice()) * bQty <= (customer.getMoneyAvailable())
+                            && event.getVenue().getPctSeatsUA() != 100
                             && (event.getVenue().getBronzePct() / 100) * event.getVenue().getCapacity() != 0) {
 
                         Ticket bronze = ticketFactory.createTicket("Bronze");
@@ -136,8 +136,8 @@ public class ProcessPurchase {
                     System.out.println("How many General Admssion tickets?");
                     int genQty = Integer.parseInt(System.console().readLine());
                     if (1 <= genQty && genQty <= 6
-                            && (event.getGeneralPrice()) * genQty <= (customer.getAvailableMoney())
-                            && event.getVenue().getSeatsUn() != 100
+                            && (event.getGenAdmPrice()) * genQty <= (customer.getMoneyAvailable())
+                            && event.getVenue().getPctSeatsUA() != 100
                             && (event.getVenue().getGenPct() / 100) * event.getVenue().getCapacity() != 0
                             && (event.getVenue().getResPct() / 100) * event.getVenue().getCapacity() != 0) {
 

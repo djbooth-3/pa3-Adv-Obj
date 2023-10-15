@@ -1,20 +1,19 @@
 /**
- * @author Rafael Ayala
+ * @author Darien Booth 
  * 
- * @since October 5, 2023
+ * @version 1.0
+ * 
+ * @since October 14, 2023
  * 
  *        - CS 3331 - Advanced Object-Oriented Programming
  * 
  *        - Dr. Daniel Mejia
  * 
- *        - Programming Assignment 2
+ *        - Programming Assignment 3
  * 
  *        - OpenAir.java
  * 
- *        - The following file defines a specialization of the Venue class known
- *        as OpenAir. This class purely exists to be
- *        a different type of Venue, but it does not have any unique attributes
- *        of its own.
+ *        - OpenAir class inheriting from Venue.
  * 
  *        - This work was done individually and completely on my own. I did not
  *        share, reproduce, or alter any part of this
@@ -28,7 +27,7 @@
  * 
  */
 
-public class OpenAir {
+public class OpenAir extends Venue {
 
     /**
      * @param none

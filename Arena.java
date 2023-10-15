@@ -1,20 +1,19 @@
 /**
- * @author Rafael Ayala
+ * @author Darien Booth 
  * 
- * @since October 12, 2023
+ * @version 1.0
  * 
- *        CS 3331 - Advanced Object-Oriented Programming
+ * @since October 14, 2023
  * 
- *        Dr. Daniel Mejia
+ *        - CS 3331 - Advanced Object-Oriented Programming
  * 
- *        Programming Assignment 3
+ *        - Dr. Daniel Mejia
  * 
- *        Arena.java
+ *        - Programming Assignment 3
  * 
- *        - The following file defines a specialization of the Venue class
- *        known as Arena. This class purely exists to be
- *        a different type of Venue, but it does not have any unique attributes
- *        of its own.
+ *        - Arena.java
+ * 
+ *        - Arena class inheriting from Venue.
  * 
  *        - This work was done individually and completely on my own. I did not
  *        share, reproduce, or alter any part of this
@@ -28,7 +27,7 @@
  * 
  */
 
-public class Arena {
+public class Arena extends Venue {
 
     /**
      * @param none

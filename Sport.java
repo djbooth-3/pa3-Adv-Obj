@@ -37,6 +37,8 @@ public class Sport extends Event {
     }
 
     /**
+     * Creator: Rafael Ayala
+     * 
      * The following method will take a String ArrayList, from the values of
      * the Event HashMap, and each value will be converted to an attribute of a new
      * Sport object
@@ -52,24 +54,15 @@ public class Sport extends Event {
 
         ColumnAttributes sportAtts = new ColumnAttributes();
 
-        sport.setEventName(events.get(sportAtts.searchForNameCol(attributes)));
-        sport.setDate(events.get(sportAtts.searchForDateCol(attributes)));
-        sport.setTime(events.get(sportAtts.searchForTimeCol(attributes)));
-        sport.setEventType(events.get(sportAtts.searchForEventTypeCol(attributes)));
-        if (attributes.size() < 23){
+        MakeVenue makevenue = new MakeVenue();
 
-        }
-        else if (events.get(sportAtts.searchForFireWorksCol(attributes)).equalsIgnoreCase("Yes")) {
-            sport.setFireworks("Yes");
-            sport.setFireWorksCost(Double.valueOf(events.get(sportAtts.searchForFireWorksCostCol(attributes))));
-        } else {
-            sport.setFireworks("No");
-            sport.setFireWorksCost(0.0);
-        }
-        Venue venue = new Venue();
-        sport.setVenue(venue.obtainVenue(events, attributes));
-        sport.getVenue().setSeatsUn(Double.valueOf(events.get(sportAtts.searchForPctSeatsUn(attributes))));
-        sport.getVenue().setVIPPct(Double.valueOf(events.get(sportAtts.searchForVIPPctCol(attributes))));
+        sport.setname(events.get(sportAtts.searchForNameCol(attributes)));
+        sport.setdate(events.get(sportAtts.searchForDateCol(attributes)));
+        sport.settime(events.get(sportAtts.searchForTimeCol(attributes)));
+        sport.setEventType(events.get(sportAtts.searchForEventTypeCol(attributes)));
+        sport.setVenue(makevenue.makeVenue(events, attributes));
+        sport.getVenue().setSeatsUA(Double.valueOf(events.get(sportAtts.searchForPctSeatsUn(attributes))));
+        sport.getVenue().setVipPct(Double.valueOf(events.get(sportAtts.searchForVIPPctCol(attributes))));
         sport.getVenue().setGoldPct(Double.valueOf(events.get(sportAtts.searchForGoldPctCol(attributes))));
         sport.getVenue().setSilverPct(Double.valueOf(events.get(sportAtts.searchForSilverPctCol(attributes))));
         sport.getVenue().setBronzePct(Double.valueOf(events.get(sportAtts.searchForBronzePctCol(attributes))));
@@ -79,7 +72,7 @@ public class Sport extends Event {
         sport.setGoldPrice(Double.valueOf(events.get(sportAtts.searchForGoldCol(attributes))));
         sport.setSilverPrice(Double.valueOf(events.get(sportAtts.searchForSilverCol(attributes))));
         sport.setBronzePrice(Double.valueOf(events.get(sportAtts.searchForBronzeCol(attributes))));
-        sport.setGeneralPrice(Double.valueOf(events.get(sportAtts.searchForGeneralCol(attributes))));
+        sport.setGenAdmPrice(Double.valueOf(events.get(sportAtts.searchForGeneralCol(attributes))));
 
         return sport;
     }
@@ -127,7 +120,7 @@ public class Sport extends Event {
                     
                         Sport originalSport = sportMap.remove(eventKey);
                         sportMap.put(newKey, originalSport);
-                        originalSport.setEventName(newName);
+                        originalSport.setname(newName);
                         adminModification.writeAdminActivity(newKey+" and modified the name.");
                         break;
                     // Change an event's date
@@ -135,7 +128,7 @@ public class Sport extends Event {
                         
                         System.out.println("Now enter the date you want to change this event to:");
                         String newDate = System.console().readLine();
-                        sport.setDate(newDate);
+                        sport.setdate(newDate);
                         adminModification.writeAdminActivity(eventKey+" and modified the date.");
                         break;
                     // Change an event's time
@@ -143,7 +136,7 @@ public class Sport extends Event {
                         
                         System.out.println("Now enter the time you want to change this event to:");
                         String newTime = System.console().readLine();
-                        sport.setTime(newTime);
+                        sport.settime(newTime);
                         adminModification.writeAdminActivity(eventKey+" and modified the time.");
                         
                         break;
@@ -193,7 +186,7 @@ public class Sport extends Event {
                         System.out.println(
                                 "Now enter the General Price you want to change this event to (include '.', even if the cents amount is 0):");
                         double newGeneral = Double.valueOf(System.console().readLine());
-                        sport.setGeneralPrice(newGeneral);
+                        sport.setGenAdmPrice(newGeneral);
                         adminModification.writeAdminActivity(eventKey+" and modified the General Price.");
                         
                         break;

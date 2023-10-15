@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- * @author Darien Booth 
+ * @author Rafael Ayala, Darien Booth 
+ * 
  * @version 1.0
+ * 
  * @since October 12, 2023
  * 
  *        - CS 3331 - Advanced Object-Oriented Programming
@@ -27,6 +26,8 @@ import java.util.HashMap;
  *        the work I produced.
  * 
  */
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Factory {
 
@@ -53,6 +54,23 @@ public class Factory {
             return new BronzeT();
         } else {
             return new GeneralT();
+        }
+    }
+
+    /**
+     * Creating venue type instance of a child class depending on input 
+     * @param venueType String for venue type
+     * @return venue based on string input 
+     */
+    public Venue createVenue(String venueType) {
+        if (venueType.equals("Arena")) {
+            return new Arena();
+        } else if (venueType.equals("Auditorium")) {
+            return new Auditorium();
+        } else if (venueType.equals("Stadium")) {
+            return new Stadium();
+        } else {
+            return new OpenAir();
         }
     }
 }

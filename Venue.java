@@ -1,6 +1,6 @@
 
 /**
- * @author Rafael Ayala
+ * @author Rafael Ayala, Darien Booth
  * 
  * @since October 5, 2023
  * 
@@ -25,21 +25,25 @@
 
 import java.util.*;
 
-public class Venue {
+public abstract class Venue {
     /**
      * These are the attributes for every Venue object, as well as its children.
+     * 
+     * 
      */
     private String venueName;
     private String venueType;
     private int capacity;
     private double cost;
-    private double pcntOfSeatsUnavailable;
-    private double pcntOfVIP;
-    private double pcntOfGold;
-    private double pcntOfSilver;
-    private double pcntOfBronze;
-    private double pcntOfGen;
-    private double pcntOfRes;
+    private String fireworksPlanned;
+    private double fireworksCost;
+    private double pctSeatsUA;
+    private double vipPct;
+    private double goldPct;
+    private double silverPct;
+    private double bronzePct;
+    private double genAdmPct;
+    private double resExtraPct;
 
     /**
      * Venue constructor
@@ -53,7 +57,7 @@ public class Venue {
      * @param none
      * @return this.venueName
      */
-    public String getVName() {
+    public String getVenueName() {
         return this.venueName;
     }
 
@@ -62,7 +66,7 @@ public class Venue {
      * @return none
      * @param venueName
      */
-    public void setVName(String venueName) {
+    public void setVenueName(String venueName) {
         this.venueName = venueName;
     }
 
@@ -71,7 +75,7 @@ public class Venue {
      * @param none
      * @return this.venueType
      */
-    public String getVType() {
+    public String getVenueType() {
         return this.venueType;
     }
 
@@ -80,7 +84,7 @@ public class Venue {
      * @return none
      * @param venueType
      */
-    public void setVType(String venueType) {
+    public void setVenueType(String venueType) {
         this.venueType = venueType;
     }
 
@@ -125,17 +129,17 @@ public class Venue {
      * @param none
      * @return this.pcntOfSeatsUnavailable
      */
-    public double getSeatsUn() {
-        return this.pcntOfSeatsUnavailable;
+    public double getPctSeatsUA() {
+        return this.pctSeatsUA;
     }
 
     /**
      * Setter for percentage of seats unavailable
-     * @param pcntOfSeatsUnavailable
+     * @param pctSeatsUA
      * @return none
      */
-    public void setSeatsUn(double pcntOfSeatsUnavailable) {
-        this.pcntOfSeatsUnavailable = pcntOfSeatsUnavailable;
+    public void setSeatsUA(double pctSeatsUA) {
+        this.pctSeatsUA = pctSeatsUA;
     }
 
     /**
@@ -143,26 +147,26 @@ public class Venue {
      * @param none
      * @return this.pcntOfVIP
      */
-    public double getVIPPct() {
-        return this.pcntOfVIP;
+    public double getVipPct() {
+        return this.vipPct;
     }
 
     /**
      * Setter for percentage of VIP seats
-     * @param pcntOfVIP
+     * @param vipPct
      * @return none
      */
-    public void setVIPPct(double pcntOfVIP) {
-        this.pcntOfVIP = pcntOfVIP;
+    public void setVipPct(double vipPct) {
+        this.vipPct = vipPct;
     }
 
     /**
      * Getter for percentage of Gold seats
      * @param none
-     * @return this.pcntOfGold
+     * @return this.goldPct
      */
     public double getGoldPct() {
-        return this.pcntOfGold;
+        return this.goldPct;
     }
 
     /**
@@ -171,7 +175,7 @@ public class Venue {
      * @return none
      */
     public void setGoldPct(double pcntOfGold) {
-        this.pcntOfGold = pcntOfGold;
+        this.goldPct = pcntOfGold;
     }
 
     /**
@@ -180,7 +184,7 @@ public class Venue {
      * @return this.pcntOfSilver
      */
     public double getSilverPct() {
-        return this.pcntOfSilver;
+        return this.silverPct;
     }
 
     /**
@@ -189,7 +193,7 @@ public class Venue {
      * @return none
      */
     public void setSilverPct(double pcntOfSilver) {
-        this.pcntOfSilver = pcntOfSilver;
+        this.silverPct = pcntOfSilver;
     }
 
     /**
@@ -198,7 +202,7 @@ public class Venue {
      * @return this.pcntOfBronze
      */
     public double getBronzePct() {
-        return this.pcntOfBronze;
+        return this.bronzePct;
     }
 
     /**
@@ -207,7 +211,7 @@ public class Venue {
      * @return none
      */
     public void setBronzePct(double pcntOfBronze) {
-        this.pcntOfBronze = pcntOfBronze;
+        this.bronzePct = pcntOfBronze;
     }
 
     /**
@@ -216,7 +220,7 @@ public class Venue {
      * @return this.pcntOfGen
      */
     public double getGenPct() {
-        return this.pcntOfGen;
+        return this.genAdmPct;
     }
 
     /**
@@ -225,7 +229,7 @@ public class Venue {
      * @return none
      */
     public void setGenPct(double pcntOfGen) {
-        this.pcntOfGen = pcntOfGen;
+        this.genAdmPct = pcntOfGen;
     }
 
     /**
@@ -234,7 +238,7 @@ public class Venue {
      * @return this.pcntOfRes
      */
     public double getResPct() {
-        return this.pcntOfRes;
+        return this.resExtraPct;
     }
 
     /**
@@ -243,29 +247,69 @@ public class Venue {
      * @return none
      */
     public void setResPct(double pcntOfRes) {
-        this.pcntOfRes = pcntOfRes;
+        this.resExtraPct = pcntOfRes;
     }
 
-    
+    /**
+     * getting desicion of fireworks plan
+     * @return string of the decision
+     */
+    public String getFireworksPlanned() {
+        return this.fireworksPlanned;
+    }
 
     /**
+     * setting decision of fireworks plan
+     * @param fireworksPlanned string for the decision
+     */
+    public void setFireworksPlanned(String fireworksPlanned) {
+        this.fireworksPlanned = fireworksPlanned;
+    }
+
+    /**
+     * getting cost of fireworks
+     * @return int of cost 
+     */
+    public double getFireworksCost() {
+        return this.fireworksCost;
+    }
+
+    /**
+     * settting cost of fireworks
+     * @param fireworksCost int for cost 
+     */
+    public void setFireworksCost(double fireworksCost) {
+        this.fireworksCost = fireworksCost;
+    }
+
+    /**
+     * Refactoring was accomplished by Rafael Ayala to adapt to Darien 
+     * Booth's implementation for the MakeVenue method
+     * 
      * The following method will obtain a Venue object from the string
      * ArrayList that composes the values of the original Event HashMap.
      * 
      * @param events
      * @return eventVenue
      */
-    public Venue obtainVenue(ArrayList<String> events, ArrayList<String>attributes) {
+    public Venue obtainVenueAttributes(ArrayList<String> events, ArrayList<String>attributes, Venue eventVenue) {
 
         ColumnAttributes venueAtts = new ColumnAttributes();
-        Venue eventVenue = new Venue();
 
-        eventVenue.setVName(events.get(venueAtts.searchForVenueName(attributes)));
-        eventVenue.setVType(events.get(venueAtts.searchForVenueType(attributes)));
+        if (attributes.size() < 23){
+        } else if (events.get(venueAtts.searchForFireWorksCol(attributes)).equalsIgnoreCase("Yes")) {
+            eventVenue.setFireworksPlanned("Yes");
+            eventVenue.setFireworksCost(Double.valueOf(events.get(venueAtts.searchForFireWorksCostCol(attributes))));
+        } else {
+            eventVenue.setFireworksPlanned("No");
+            eventVenue.setFireworksCost(0.0);
+        }
+        eventVenue.setVenueName(events.get(venueAtts.searchForVenueName(attributes)));
+        eventVenue.setVenueType(events.get(venueAtts.searchForVenueType(attributes)));
         eventVenue.setCapacity(Integer.parseInt(events.get(venueAtts.searchForCapacity(attributes))));
         eventVenue.setCost(Double.valueOf(events.get(venueAtts.searchForVenueCost(attributes))));
-        eventVenue.setSeatsUn(Double.valueOf(events.get(venueAtts.searchForPctSeatsUn(attributes))));
-        eventVenue.setVIPPct(Double.valueOf(events.get(venueAtts.searchForVIPPctCol(attributes))));
+        eventVenue.setSeatsUA(Double.valueOf(events.get(venueAtts.searchForPctSeatsUn(attributes))));
+        eventVenue.setVipPct(Double.valueOf(events.get(venueAtts.searchForVIPPctCol(attributes))));
         eventVenue.setGoldPct(Double.valueOf(events.get(venueAtts.searchForGoldPctCol(attributes))));
         eventVenue.setSilverPct(Double.valueOf(events.get(venueAtts.searchForSilverPctCol(attributes))));
         eventVenue.setBronzePct(Double.valueOf(events.get(venueAtts.searchForBronzePctCol(attributes))));

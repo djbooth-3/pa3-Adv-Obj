@@ -102,7 +102,10 @@ public class RunTicket {
 
         while (true) {
 
-            LoginPage userLogin = new LoginPage();
+            /**
+             * Darien Booth's code logic for logging in as a user will be implemented
+             */
+            NewLoginPage userLogin = new NewLoginPage();
             Customer customer = new Customer();
             customer = userLogin.userLoginInterface(myTicketMinerSingleton.getCustomerList(),
                     myTicketMinerSingleton.getSportMap(), myTicketMinerSingleton.getConcertMap(),
@@ -115,7 +118,7 @@ public class RunTicket {
                     System.out.println(
                             "================================================================================");
                             // The purpose of this format is to round the value to two decimal places.
-                    System.out.println("Your current balance: " + Math.floor(customer.getAvailableMoney() * 100) / 100);
+                    System.out.println("Your current balance: " + Math.floor(customer.getMoneyAvailable() * 100) / 100);
                     System.out.println(
                             "Enter the number of the type of event you would like to purchase a ticket for or the information you would like to view: ");
 
@@ -138,7 +141,7 @@ public class RunTicket {
                                     "Enter the ID of the event you would like to purchase for followed by a space, followed by the event's name.\nFormat: ID Event Name");
                             String sKey = System.console().readLine();
 
-                            if (sportMap.get(sKey).getVenue().getSeatsUn() == 100) {
+                            if (sportMap.get(sKey).getVenue().getPctSeatsUA() == 100) {
                                 System.out.println(
                                         "Sorry, but there are no more tickets available for this event.  You will be redirected to the start.");
                                 break;
@@ -155,7 +158,7 @@ public class RunTicket {
                                     "Enter the ID of the event you would like to purchase for followed by a space, followed by the event's name.\nFormat: ID Event Name");
                             String cKey = System.console().readLine();
 
-                            if (concertMap.get(cKey).getVenue().getSeatsUn() == 100) {
+                            if (concertMap.get(cKey).getVenue().getPctSeatsUA() == 100) {
                                 System.out.println(
                                         "Sorry, but there are no more tickets available for this event.  You will be redirected to the start.");
                                 break;
@@ -172,7 +175,7 @@ public class RunTicket {
                                     "Enter the ID of the event you would like to purchase for followed by a space, followed by the event's name.\nFormat: ID Event Name");
                             String fKey = System.console().readLine();
 
-                            if (festivalMap.get(fKey).getVenue().getSeatsUn() == 100) {
+                            if (festivalMap.get(fKey).getVenue().getPctSeatsUA() == 100) {
                                 System.out.println(
                                         "Sorry, but there are no more tickets available for this event.  You will be redirected to the start.");
                                 break;

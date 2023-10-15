@@ -1,13 +1,13 @@
 /**
- * @author Rafael Ayala
+ * @author Darien Booth, Rafael Ayala
  * 
- * @since October 5, 2023
+ * @since October 12, 2023
  * 
  * - CS 3331 - Advanced Object-Oriented Programming
  * 
  * - Dr. Daniel Mejia
  * 
- * - Programming Assignment 2
+ * - Programming Assignment 3
  * 
  * - ObjectAsString.java
  * 
@@ -34,45 +34,45 @@ public class ObjectAsString {
 
         RevenueCalculator revCalc = new RevenueCalculator();
 
-        String eType = eventTemp.getEventType();
-        String eName = eventTemp.getEventName();
-        String eDate = eventTemp.getDate();
-        String eTime = eventTemp.getTime();
-        String eVPrc = String.valueOf(eventTemp.getVipPrice());
-        String eGPrc = String.valueOf(eventTemp.getGoldPrice());
-        String eSPrc = String.valueOf(eventTemp.getSilverPrice());
-        String eBPrc = String.valueOf(eventTemp.getBronzePrice());
-        String eGAPrc = String.valueOf(eventTemp.getGeneralPrice());
-        String eVenName = eventTemp.getVenue().getVName();
-        String ePctUn = String.valueOf(eventTemp.getVenue().getSeatsUn());
-        String eVenType = eventTemp.getVenue().getVType();
-        String eVCpcty = String.valueOf(eventTemp.getVenue().getCapacity());
-        String eVCost = String.valueOf(eventTemp.getVenue().getCost());
-        String eVIPPct = String.valueOf(eventTemp.getVenue().getVIPPct());
-        String eGoldPct = String.valueOf(eventTemp.getVenue().getGoldPct());
-        String eSilverPct = String.valueOf(eventTemp.getVenue().getSilverPct());
-        String eBronzePct = String.valueOf(eventTemp.getVenue().getBronzePct());
-        String eGenPct = String.valueOf(eventTemp.getVenue().getGenPct());
-        String eResPct = String.valueOf(eventTemp.getVenue().getResPct());
-        String eFWPlanned = String.valueOf(eventTemp.getFireworks());
-        String eFWCost = String.valueOf(eventTemp.getFireWorksCost());
-        String eVIPSold = String.valueOf(eventTemp.getSoldVip());
-        String eGoldSold = String.valueOf(eventTemp.getSoldGold());
-        String eSilverSold = String.valueOf(eventTemp.getSoldSilver());
-        String eBronzeSold = String.valueOf(eventTemp.getSoldBronze());
-        String eGenSold = String.valueOf(eventTemp.getSoldGen());
-        String eVIPRev = String.valueOf(revCalc.getVipRev(eventTemp));
-        String eGoldRev = String.valueOf(revCalc.getGoldRev(eventTemp));
-        String eSilverRev = String.valueOf(revCalc.getSilverRev(eventTemp));
-        String eBronzeRev = String.valueOf(revCalc.getBronzeRev(eventTemp));
-        String eGenRev = String.valueOf(revCalc.getGenRev(eventTemp));
+        String pt1 = eventTemp.getEventType();
+        String pt2 = eventTemp.getname();
+        String pt3 = eventTemp.getdate();
+        String pt4 = eventTemp.gettime();
+        String pt5 = String.valueOf(eventTemp.getVipPrice());
+        String pt6 = String.valueOf(eventTemp.getGoldPrice());
+        String pt7 = String.valueOf(eventTemp.getSilverPrice());
+        String pt8 = String.valueOf(eventTemp.getBronzePrice());
+        String pt9 = String.valueOf(eventTemp.getGenAdmPrice());
+        String pt10 = eventTemp.getVenue().getVenueName();
+        String pt11 = String.valueOf(eventTemp.getVenue().getPctSeatsUA());
+        String pt12 = eventTemp.getVenue().getVenueType();
+        String pt13 = String.valueOf(eventTemp.getVenue().getCapacity());
+        String pt14 = String.valueOf(eventTemp.getVenue().getCost());
+        String pt15 = String.valueOf(eventTemp.getVenue().getVipPct());
+        String pt16 = String.valueOf(eventTemp.getVenue().getGoldPct());
+        String pt17 = String.valueOf(eventTemp.getVenue().getSilverPct());
+        String pt18 = String.valueOf(eventTemp.getVenue().getBronzePct());
+        String pt19 = String.valueOf(eventTemp.getVenue().getGenPct());
+        String pt20 = String.valueOf(eventTemp.getVenue().getResPct());
+        String pt21 = String.valueOf(eventTemp.getVenue().getFireworksPlanned());
+        String pt22 = String.valueOf(eventTemp.getVenue().getFireworksCost());
+        String pt23 = String.valueOf(eventTemp.getSoldVip());
+        String pt24 = String.valueOf(eventTemp.getSoldGold());
+        String pt25 = String.valueOf(eventTemp.getSoldSilver());
+        String pt26 = String.valueOf(eventTemp.getSoldBronze());
+        String pt27 = String.valueOf(eventTemp.getSoldGen());
+        String pt28 = String.valueOf(revCalc.getVipRev(eventTemp));
+        String pt29 = String.valueOf(revCalc.getGoldRev(eventTemp));
+        String pt30 = String.valueOf(revCalc.getSilverRev(eventTemp));
+        String pt31 = String.valueOf(revCalc.getBronzeRev(eventTemp));
+        String pt32 = String.valueOf(revCalc.getGenRev(eventTemp));
 
-        String csvRow = eType + "," + eName + "," + eDate + "," + eTime + "," + eVPrc + ","
-        + eGPrc + "," + eSPrc + "," + eBPrc + "," + eGAPrc + "," + eVenName + "," + ePctUn + ","
-        + eVenType + "," + eVCpcty + "," + eVCost + "," + eVIPPct + "," + eGoldPct + "," + eSilverPct
-        + "," + eBronzePct + "," + eGenPct + "," + eResPct + "," + eFWPlanned + "," + eFWCost + ","
-        + eVIPSold + "," + eGoldSold + "," + eSilverSold + "," + eBronzeSold + "," + eGenSold + ","
-        + eVIPRev + "," + eGoldRev + "," + eSilverRev + "," + eBronzeRev + "," + eGenRev + "\n";
+        String csvRow = pt1 + "," + pt2 + "," + pt3 + "," + pt4 + "," + pt5 + ","
+        + pt6 + "," + pt7 + "," + pt8 + "," + pt9 + "," + pt10 + "," + pt11 + ","
+        + pt12 + "," + pt13 + "," + pt14 + "," + pt15 + "," + pt16 + "," + pt17
+        + "," + pt18 + "," + pt19 + "," + pt20 + "," + pt21 + "," + pt22 + ","
+        + pt23 + "," + pt24 + "," + pt25 + "," + pt26 + "," + pt27 + ","
+        + pt28 + "," + pt29 + "," + pt30 + "," + pt31 + "," + pt32 + "\n";
 
         return csvRow;
     }

@@ -1,6 +1,6 @@
 
 /**
- * @author Rafael Ayala
+ * @author Rafael Ayala, Darien Booth
  * 
  * @since October 5, 2023
  * 
@@ -30,20 +30,26 @@ import java.lang.*;
 public abstract class Event {
     /**
      * These are the attributes for every Event object, as well as its children.
+     * 
+     * The following attributes were implemented by Darien Booth, as well as their
+     * setters and getters.
      */
-    private String eventName;
-    private String eventDate;
-    private String eventTime;
-    private int eventID;
+    private String name;
+    private String date;
+    private String time;
+    private int idEvent;
     private String eventType;
-    private String fireWorks;
-    private double fireWorksCost;
     private Venue venue;
     private double vipPrice;
     private double goldPrice;
     private double silverPrice;
     private double bronzePrice;
-    private double generalPrice;
+    private double genAdmPrice;
+
+    /**
+     * The following attributes were implemented by Rafael Ayala, as well as their
+     * setters and getters.
+     */
     private double taxCharged;
     private double vipRev;
     private double goldRev;
@@ -55,6 +61,7 @@ public abstract class Event {
     private ArrayList<SilverT> silverTicketsPurchased = new ArrayList<SilverT>();
     private ArrayList<BronzeT> bronzeTicketsPurchased = new ArrayList<BronzeT>();
     private ArrayList<GeneralT> generalTicketsPurchased = new ArrayList<GeneralT>();
+    private double discounted;
 
     /**
      * Constructor for Event
@@ -195,16 +202,16 @@ public abstract class Event {
      * @param none
      * @return this.eventName
      */
-    public String getEventName() {
-        return this.eventName;
+    public String getname() {
+        return this.name;
     }
     /**
      * Setter for Event Name
-     * @param event
+     * @param name
      * @return none
      */
-    public void setEventName(String event) {
-        this.eventName = event;
+    public void setname(String name) {
+        this.name = name;
     }
 
     /**
@@ -212,17 +219,17 @@ public abstract class Event {
      * @param none
      * @return this.eventDate
      */
-    public String getDate() {
-        return this.eventDate;
+    public String getdate() {
+        return this.date;
     }
 
     /**
      * Setter for Event Date
-     * @param eventDate
+     * @param date
      * @return none
      */
-    public void setDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setdate(String date) {
+        this.date = date;
     }
 
     /**
@@ -230,16 +237,16 @@ public abstract class Event {
      * @param none
      * @return this.eventTime
      */
-    public String getTime() {
-        return this.eventTime;
+    public String gettime() {
+        return this.time;
     }
     /**
      * Setter for Event TIme
-     * @param eventTime
+     * @param time
      * @return none
      */
-    public void setTime(String eventTime) {
-        this.eventTime = eventTime;
+    public void settime(String time) {
+        this.time = time;
     }
 
     /**
@@ -264,50 +271,16 @@ public abstract class Event {
      * @param none
      * @return this.eventID
      */
-    public int getID() {
-        return this.eventID;
+    public int getidEvent() {
+        return this.idEvent;
     }
     /**
      * Setter for Event ID
-     * @param eventID
+     * @param idEvent
      * @return none
      */
-    public void setID(int eventID) {
-        this.eventID = eventID;
-    }
-
-    /**
-     * Getter for Fireworks characteristic of an event
-     * @param none
-     * @return this.fireWorks
-     */
-    public String getFireworks() {
-        return this.fireWorks;
-    }
-    /**
-     * Setter for Fireworks characteristics of an event
-     * @param fireWorks
-     * @return none
-     */
-    public void setFireworks(String fireWorks) {
-        this.fireWorks = fireWorks;
-    }
-
-    /**
-     * Getter for Fireworks cost; Will only apply if an event has fireworks planned
-     * @param none
-     * @return this.fireWorksCost
-     */
-    public double getFireWorksCost() {
-        return this.fireWorksCost;
-    }
-    /**
-     * Setter for Fireworks cost: Will only apply if an event has fireworks planned
-     * @return none
-     * @param fireWorksCost
-     */
-    public void setFireWorksCost(double fireWorksCost) {
-        this.fireWorksCost = fireWorksCost;
+    public void setidEvent(int idEvent) {
+        this.idEvent = idEvent;
     }
 
     /**
@@ -363,8 +336,8 @@ public abstract class Event {
 
     /**
      * Getter for Bronze Price of an event.
-     * @param getBronzePrice
-     * @return bronzePrice
+     * @return getBronzePrice
+     * @param none
      */
     public double getBronzePrice() {
         return bronzePrice;
@@ -383,16 +356,16 @@ public abstract class Event {
      * @param none
      * @return generalPrice
      */
-    public double getGeneralPrice() {
-        return generalPrice;
+    public double getGenAdmPrice() {
+        return genAdmPrice;
     }
     /**
      * Setter for General Admission Price of an event.
      * @return none
-     * @param generalPrice
+     * @param genAdmPrice
      */
-    public void setGeneralPrice(double generalPrice) {
-        this.generalPrice = generalPrice;
+    public void setGenAdmPrice(double genAdmPrice) {
+        this.genAdmPrice = genAdmPrice;
     }
 
     /**
@@ -476,8 +449,28 @@ public abstract class Event {
     }
 
     /**
+     * Getter for Total Discounted
+     * @return
+     */
+    public double getDiscounted() {
+        return discounted;
+    }
+
+    /**
+     * Setter for Total Discounted
+     * @param discounted
+     */
+    public void setDiscounted(double discounted) {
+        this.discounted = discounted;
+    }
+
+    /**
      * The following method will simply print all of the event information of an
      * event.
+     * 
+     * This method was originally created by Rafael Ayala, but was modified to
+     * accomodate for Darien Booth's implementation of certain attributes, such
+     * as the event's name, date, and time.
      * 
      * @param event
      * @return none
@@ -491,16 +484,16 @@ public abstract class Event {
         double totalRev = event.getVipRev() + event.getGoldRev() + event.getSilverRev() + event.getBronzeRev() + event.getGenRev();
 
         System.out.println("ID and Name: "+eventKey);
-        System.out.println("Date: " + event.getDate());
-        System.out.println("Time: " + event.getTime());
+        System.out.println("Date: " + event.getdate());
+        System.out.println("Time: " + event.gettime());
         System.out.println("Event Type: " + event.getEventType());
-        System.out.println("Fireworks? " + event.getFireworks());
-        System.out.println("Fireworks cost: $"+event.getFireWorksCost());
+        System.out.println("Fireworks? " + event.getVenue().getFireworksPlanned());
+        System.out.println("Fireworks cost: $"+event.getVenue().getFireworksCost());
         System.out.println(
-                "Venue: " + event.getVenue().getVName() + ", Type: " + event.getVenue().getVType() + ", Capacity: "
+                "Venue: " + event.getVenue().getVenueName() + ", Type: " + event.getVenue().getVenueType() + ", Capacity: "
                         + event.getVenue().getCapacity() + ", Venue Cost: $" + event.getVenue().getCost());
         System.out.println("Total Seats Sold: " + totalTickets+", Remaining: "+(event.getVenue().getCapacity() - totalTickets));
-        System.out.println("Total VIP seats sold: " + event.getSoldVip()+", Remaining: "+(((event.getVenue().getVIPPct()/100)*event.getVenue().getCapacity()) - event.getSoldVip()));
+        System.out.println("Total VIP seats sold: " + event.getSoldVip()+", Remaining: "+(((event.getVenue().getVipPct()/100)*event.getVenue().getCapacity()) - event.getSoldVip()));
         System.out.println("Total Gold seats sold: " + event.getSoldGold()+", Remaining: "+(((event.getVenue().getGoldPct()/100)*event.getVenue().getCapacity()) - event.getSoldGold()));
         System.out.println("Total Silver seats sold: " + event.getSoldSilver()+", Remaining: "+(((event.getVenue().getSilverPct()/100)*event.getVenue().getCapacity()) - event.getSoldSilver()));
         System.out.println("Total Bronze seats sold: " + event.getSoldBronze()+", Remaining: "+(((event.getVenue().getBronzePct()/100)*event.getVenue().getCapacity()) - event.getSoldBronze()));
@@ -517,7 +510,8 @@ public abstract class Event {
         System.out.println("Total revenue for General Admission tickets: $" + Math.floor(event.getGenRev()*100)/100);
         System.out.println("Total revenue for all tickets: $"+Math.floor(totalRev*100)/100);
         System.out.println("Expected Profit(Sell Out) $"+expectedProfitNice);
-        System.out.println("Actual Profit: " + Math.floor((totalRev - event.getVenue().getCost() - event.getFireWorksCost() - (totalRev*0.0825))*100)/100);
+        System.out.println("Actual Profit: $" + Math.floor((totalRev - event.getVenue().getCost() - event.getVenue().getFireworksCost() - (totalRev*0.0825))*100)/100);
         System.out.println("Total tax charged: $"+(Math.floor(event.getTaxCharged()*100))/100);
+        System.out.println("Total Discounted: $"+(Math.floor(event.getDiscounted()*100))/100);
     }
 }

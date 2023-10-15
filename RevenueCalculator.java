@@ -73,7 +73,7 @@ public class RevenueCalculator {
      * @return
      */
     public double getGenRev(Event event){
-        return (Math.floor(event.getGeneralPrice() * Double.valueOf(event.getSoldGen() * 100) / 100));
+        return (Math.floor(event.getGenAdmPrice() * Double.valueOf(event.getSoldGen() * 100) / 100));
     }
 
     /**
@@ -84,14 +84,14 @@ public class RevenueCalculator {
      */
     public double getExpectedProfit(Event event){
         
-        double expVipProfit = ((event.getVenue().getVIPPct()/100) * event.getVenue().getCapacity()) * event.getVipPrice();
+        double expVipProfit = ((event.getVenue().getVipPct()/100) * event.getVenue().getCapacity()) * event.getVipPrice();
         double expGoldProfit = ((event.getVenue().getGoldPct()/100) * event.getVenue().getCapacity()) * event.getGoldPrice();
         double expSilverProfit = ((event.getVenue().getSilverPct()/100) * event.getVenue().getCapacity()) * event.getSilverPrice();
         double expBronzeProfit = ((event.getVenue().getBronzePct()/100) * event.getVenue().getCapacity()) * event.getBronzePrice();
-        double expGeneralProfit = ((event.getVenue().getGenPct()/100) * event.getVenue().getCapacity()) * event.getGeneralPrice();
+        double expGeneralProfit = ((event.getVenue().getGenPct()/100) * event.getVenue().getCapacity()) * event.getGenAdmPrice();
 
         double ticketTotal = expVipProfit + expGoldProfit + expSilverProfit + expBronzeProfit + expGeneralProfit;
 
-        return (Math.floor((ticketTotal - event.getVenue().getCost() - event.getFireWorksCost() - (ticketTotal*0.0825))*100))/100;
+        return (Math.floor((ticketTotal - event.getVenue().getCost() - event.getVenue().getFireworksCost() - (ticketTotal*0.0825))*100))/100;
     }
 }

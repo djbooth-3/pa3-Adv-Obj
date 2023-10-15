@@ -111,6 +111,9 @@ public abstract class Ticket {
      * balance and invoice/ticket collection, the event's 
      * availability values and ticket collections, and the venue's availability.
      * Activity will be written to an output file.
+     *
+     * This method was designed by Rafael Ayala and checked by Darien Booth
+     * 
      * @param event
      * @param customer
      * @param mapKey
@@ -123,22 +126,23 @@ public abstract class Ticket {
         double tax = totalPrice * 0.0825;
         double totalPricewithDiscount = totalPrice * 0.9;
         double taxWithDiscount = totalPricewithDiscount * 0.0825;
-        if(customer.getTMMS() == true){
-            invoice.setTotal(totalPricewithDiscount + taxWithDiscount);
-            customer.setAvailableMoney(customer.getAvailableMoney() - invoice.getTotal());
+        if(customer.getMembership() == true){
+            invoice.setTotalPrice(totalPricewithDiscount + taxWithDiscount);
+            customer.setMoneyAvailable(customer.getMoneyAvailable() - invoice.getTotalPrice());
             customer.setSaved(customer.getSaved() + totalPricewithDiscount*0.1);
             event.setTaxCharged(event.getTaxCharged() + taxWithDiscount);
-            event.setVipRev(event.getVipRev() + invoice.getTotal());
+            event.setVipRev(event.getVipRev() + invoice.getTotalPrice());
+            event.setDiscounted(event.getDiscounted() + totalPricewithDiscount*0.1);
         } else {
-            invoice.setTotal(totalPrice + tax);
-            customer.setAvailableMoney(customer.getAvailableMoney() - invoice.getTotal());
+            invoice.setTotalPrice(totalPrice + tax);
+            customer.setMoneyAvailable(customer.getMoneyAvailable() - invoice.getTotalPrice());
             event.setTaxCharged(event.getTaxCharged() + tax);
-            event.setVipRev(event.getVipRev() + invoice.getTotal());
+            event.setVipRev(event.getVipRev() + invoice.getTotalPrice());
         }
-        invoice.setCustomerLastNameandEventName(customer.getLName() + ", " + event.getEventName());
-        invoice.setTicketQuantity(tQty);
+        invoice.setCustomerLastNameandEventName(customer.getLastName() + ", " + event.getname());
+        invoice.setNumOfTickets(tQty);
         invoice.setTicketType(ticketType);
-        invoice.setConNum((int) (Math.random() * 99999999));
+        invoice.setConfirmationNum((int) (Math.random() * 99999999));
 
         if(ticketType.equalsIgnoreCase("Vip")){
             VipT vip = new VipT();
@@ -187,14 +191,14 @@ public abstract class Ticket {
             }
         }
 
-        event.getVenue().setSeatsUn(event.getVenue().getSeatsUn() + (tQty/event.getVenue().getCapacity()));
+        event.getVenue().setSeatsUA(event.getVenue().getPctSeatsUA() + (tQty/event.getVenue().getCapacity()));
 
-        customer.addInvoice(invoice);
+        customer.setInvoice(invoice);
 
         customer.addEvent(mapKey);
 
         WriteToFile textFile = new WriteToFile();
-        textFile.writeToOutputFile(customer, tQty, ticketType, event, customer.getAvailableMoney(), mapKey);
+        textFile.writeToOutputFile(customer, tQty, ticketType, event, customer.getMoneyAvailable(), mapKey);
 
         // This message will be printed to signify a valid transaction.
         System.out.println("Thank you for using TicketMiner!");

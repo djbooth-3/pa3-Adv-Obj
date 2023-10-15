@@ -1,13 +1,13 @@
 /**
- * @author Rafael Ayala
+ * @author Rafael Ayala, Darien Booth
  * 
- * @since September 14, 2023
+ * @since October 14, 2023
  * 
  *        - CS 3331 - Advanced Object-Oriented Programming
  * 
  *        - Dr. Daniel Mejia
  * 
- *        - Programming Assignment 1
+ *        - Programming Assignment 3
  * 
  *        - Invoice.java
  * 
@@ -31,24 +31,25 @@ public class Invoice {
 
     /**
      * These are the attributes for each Invoice object.
+     * The following attributes come from Rafael Ayala's 
+     * original implementation of the TicketMiner system, 
+     * as well as their getters and setters.
      */
     private String customerLastNameandEventName;
     private String ticketType;
-    private int ticketQuantity;
+    /**
+     * The following attributes come from Darien Booth's
+     * original implementation of the TicketMiner system,
+     * as well as their getters and setters.
+     */
+    private int numOfTickets;
     private double totalPrice;
-    private int conNum;
+    private int confirmationNum;
 
     /**
      * @param none
      */
     public Invoice() {
-    }
-
-    /**
-     * @param customerLastNameandEventName
-     */
-    public Invoice(String customerLastNameandEventName) {
-        this.customerLastNameandEventName = customerLastNameandEventName;
     }
 
     /**
@@ -71,23 +72,23 @@ public class Invoice {
      * @param none
      * @return this.ticketQuantity
      */
-    public int getTicketQuantity() {
-        return this.ticketQuantity;
+    public int getNumOfTickets() {
+        return this.numOfTickets;
     }
 
     /**
      * @return none
-     * @param ticketQuantity
+     * @param numOfTickets
      */
-    public void setTicketQuantity(int ticketQuantity) {
-        this.ticketQuantity = ticketQuantity;
+    public void setNumOfTickets(int numOfTickets) {
+        this.numOfTickets = numOfTickets;
     }
 
     /**
      * @param none
      * @return this.totalPrice
      */
-    public double getTotal() {
+    public double getTotalPrice() {
         return this.totalPrice;
     }
 
@@ -95,7 +96,7 @@ public class Invoice {
      * @return none
      * @param totalPrice
      */
-    public void setTotal(double totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -103,16 +104,16 @@ public class Invoice {
      * @param none
      * @return this.conNume
      */
-    public int getConNum() {
-        return this.conNum;
+    public int getConfirmationNum() {
+        return this.confirmationNum;
     }
 
     /**
      * @return none
-     * @param conNum
+     * @param confirmationNum
      */
-    public void setConNum(int conNum) {
-        this.conNum = conNum;
+    public void setConfirmationNum(int confirmationNum) {
+        this.confirmationNum = confirmationNum;
     }
 
     /**

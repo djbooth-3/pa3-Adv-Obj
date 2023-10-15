@@ -1,5 +1,5 @@
 /**
- * @author Rafael Ayala
+ * @author Rafael Ayala, Darien Booth
  * 
  * @since October 5, 2023
  * 
@@ -29,6 +29,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Class was originally created by Rafael Ayala, but this version accounts for
+ * implementations of Darien Booth's code logic.
+ */
 public class WriteToFile {
 
     /**
@@ -43,7 +47,7 @@ public class WriteToFile {
      * 
      * @param customer
      * @param ticketQty
-     * @param tickets
+     * @param ticketType
      * @param event
      * @param balance
      * @param eventInfo
@@ -52,12 +56,12 @@ public class WriteToFile {
 
     // Note: I did not believe it would be relevant to record mistakes in the text
     // file, so all incorrect inputs are omitted.
-    public void writeToOutputFile(Customer customer, int ticketQty, Ticket tickets, Event event, double balance,
+    public void writeToOutputFile(Customer customer, int ticketQty, String ticketType, Event event, double balance,
             String eventInfo) {
         try {
             String outputFile = "log.txt";
-            String logItem = (customer.getFName() + " " + customer.getLName() + " bought " + ticketQty + " "
-                    + tickets.getTName() + " ticket(s) for event ID " + eventInfo + ".  Customer's current balance is "
+            String logItem = (customer.getFirstName() + " " + customer.getLastName() + " bought " + ticketQty + " "
+                    + ticketType + " ticket(s) for event ID " + eventInfo + ".  Customer's current balance is "
                     + Math.floor(balance * 100) / 100 + "\n");
             FileWriter output = new FileWriter(outputFile, true);
             output.write(logItem);
@@ -85,6 +89,10 @@ public class WriteToFile {
     }
 
     /**
+     * This method was originally created by Rafael Ayala, but it now implements the
+     * code logic for transferring Event attributes into a String for an updated 
+     * Event csv file.
+     * 
      * The following method will create an updated CustomerList csv file.
      * @param customerList
      */
@@ -93,20 +101,25 @@ public class WriteToFile {
         try {
             String updatedCList = "updatedCustomerSheet.csv";
 
-            String attributes = "ID,First Name,Last Name,Money Available,Concerts Purchased,TicketMiner Membership,Username,Password\n";
-
-            FileWriter customerOutput = new FileWriter(updatedCList);
-            customerOutput.write(attributes);
-            for (int i = 0; i < customerList.size(); i++) {
-                String customerListRow = customerList.get(i).getID() + "," + customerList.get(i).getFName() + ","
-                        + customerList.get(i).getLName() + "," + String.valueOf(customerList.get(i).getAvailableMoney())
-                        + "," + String.valueOf(customerList.get(i).getNumOfPurchasedEvents()) + ","
-                        + String.valueOf(customerList.get(i).getTMMS()) + "," + customerList.get(i).getUserN() + ","
-                        + customerList.get(i).getPassW() + "\n";
-                customerOutput.write(customerListRow);
+            ArrayList<String> updatedCustomerList = new ArrayList<>(); // add new arraylist for information to new customer csv file 
+            updatedCustomerList.add("ID,First Name,Last Name,Money Available,Concerts Purchased,TicketMiner Membership,Username,Password"); // adding headers
+            for(int i = 0; i < customers.size(); i++) {  // looping through customers and adding information for each part 
+                String pt1 = Integer.toString(customers.get(i).getCustomerID());
+                String pt2 = customers.get(i).getFirstName();
+                String pt3 = customers.get(i).getLastName();
+                String pt4 = String.format("%.2f",customers.get(i).getMoneyAvailable());
+                String pt5 = Integer.toString(customers.get(i).getConcertsPurchased());
+                String pt6 = Boolean.toString(customers.get(i).getMembership());
+                String pt7 = customers.get(i).getUsername();
+                String pt8 = customers.get(i).getPassword();
+                updatedCustomerList.add(pt1 + "," + pt2 + "," + pt3 + "," + pt4 + "," + pt5 + "," + pt6 + "," + pt7 + "," + pt8); // putting all together
             }
-            customerOutput.close();
-
+            File file = new File(updatedCList); // updating file path 
+            FileWriter csvw = new FileWriter(file);
+            for(int i = 0; i < updatedCustomerList.size(); i++){  // loop adding each line of new updated customer list to the csv file 
+                csvw.write(updatedCustomerList.get(i) + "\n"); 
+            }
+            csvw.close();
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -133,12 +146,16 @@ public class WriteToFile {
 
                 String[] splitKey = se.getKey().split(" ");
 
-                Sport sportTemp = se.getValue();
+                Event sportTemp = se.getValue();
 
                 String sID = splitKey[0];
 
                 ObjectAsString sportString = new ObjectAsString();
 
+                /**
+                 * String value will be obtained with Darien Booth's logic for transforming 
+                 * Event object attributes into a csv string.
+                 */
                 String restOfSportObj = sportString.eventAsString(sportTemp);
 
                 String sportRow = sID + "," + restOfSportObj;
@@ -152,12 +169,16 @@ public class WriteToFile {
 
                 String[] splitKey = ce.getKey().split(" ");
 
-                Concert concertTemp = ce.getValue();
+                Event concertTemp = ce.getValue();
 
                 String cID = splitKey[0];
 
                 ObjectAsString concertString = new ObjectAsString();
 
+                /**
+                 * String value will be obtained with Darien Booth's logic for transforming 
+                 * Event object attributes into a csv string.
+                 */
                 String restOfConcertObj = concertString.eventAsString(concertTemp);
 
                 String concertRow = cID + "," + restOfConcertObj;
@@ -170,10 +191,14 @@ public class WriteToFile {
 
                 String[] splitKey = fe.getKey().split(" ");
 
-                Festival festivalTemp = fe.getValue();
+                Event festivalTemp = fe.getValue();
 
                 String fID = splitKey[0];
 
+                /**
+                 * String value will be obtained with Darien Booth's logic for transforming 
+                 * Event object attributes into a csv string.
+                 */
                 ObjectAsString festivalString = new ObjectAsString();
 
                 String restOfFestivalObj = festivalString.eventAsString(festivalTemp);

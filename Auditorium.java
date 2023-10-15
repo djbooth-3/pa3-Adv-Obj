@@ -1,7 +1,9 @@
 /**
- * @author Rafael Ayala
+ * @author Darien Booth 
  * 
- * @since October 12, 2023
+ * @version 1.0
+ * 
+ * @since October 14, 2023
  * 
  *        - CS 3331 - Advanced Object-Oriented Programming
  * 
@@ -11,10 +13,7 @@
  * 
  *        - Auditorium.java
  * 
- *        - The following file defines a specialization of the Venue class known
- *        as Auditorium. This class purely exists to be
- *        a different type of Venue, but it does not have any unique attributes
- *        of its own.
+ *        - Auditorium class inheriting from Venue.
  * 
  *        - This work was done individually and completely on my own. I did not
  *        share, reproduce, or alter any part of this
@@ -28,7 +27,7 @@
  * 
  */
 
-public class Auditorium {
+public class Auditorium extends Venue{
 
     /**
      * @param none
